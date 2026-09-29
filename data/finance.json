@@ -1,0 +1,7 @@
+{
+  "auth": {
+    "pinSalt": "84538322604a3f21ac454eb4b40c79f2",
+    "pinHash": "aed145bef31b80abd51d1725db29a26bb249eeef3b72669266c65e014804aaf6db72f361f50fce035d92f4902a358dfa30f8f315cf68f675bffbb1e2be2b71f1"
+  },
+  "transactions": []
+}

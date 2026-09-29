@@ -1,0 +1,133 @@
+{
+  "modules": [
+    {
+      "id": "blockchain",
+      "name": "Blockchain",
+      "code": "BC",
+      "description": "Explore transactions, cryptography, blocks, networks and consensus through interactive explanations.",
+      "available": true,
+      "lessons": 1,
+      "icon": "Blocks",
+      "accent": "#f28c28"
+    },
+    {
+      "id": "blockchain1",
+      "name": "Blockchain",
+      "code": "BC",
+      "description": "Explore transactions, cryptography, blocks, networks and consensus through interactive explanations.",
+      "available": true,
+      "lessons": 1,
+      "icon": "Blocks",
+      "accent": "#f28c28"
+    },
+    {
+      "id": "project-management",
+      "name": "Project Management",
+      "code": "PM",
+      "description": "Learn planning, Agile development, teamwork, risk management and project delivery.",
+      "available": false,
+      "lessons": 0,
+      "icon": "FolderKanban",
+      "accent": "#a879ff"
+    },
+    {
+      "id": "backend",
+      "name": "Backend Development",
+      "code": "BE",
+      "description": "Understand APIs, servers, databases, authentication and backend architecture.",
+      "available": false,
+      "lessons": 0,
+      "icon": "Database",
+      "accent": "#32c785"
+    },
+    {
+      "id": "frontend",
+      "name": "Frontend Development",
+      "code": "FE",
+      "description": "Learn interfaces, components, state, accessibility and modern frontend development.",
+      "available": false,
+      "lessons": 0,
+      "icon": "Code2",
+      "accent": "#30b8d4"
+    }
+  ],
+  "concepts": [
+  {
+    "id": "consensus",
+    "name": "Consensus Mechanisms",
+    "description":
+      "See how distributed nodes agree on a valid block without relying on one central controller.",
+    "icon": "Network",
+    "available": true,
+    "level": "Foundational to advanced",
+    "activities": "5 protocol lessons",
+    "accent": "#f28c28"
+  },
+  {
+    "id": "transaction-manipulation",
+    "name": "Transaction Manipulation",
+    "description":
+      "See how Manipulation of transactions can be done in a blockchain network and how it can be prevented.",
+    "icon": "Network",
+    "available": true,
+    "level": "Foundational to advanced",
+    "activities": "How changing a transaction can affect the blockchain",
+    "accent": "#f28c80"
+  },
+  {
+    "id": "transactions",
+    "name": "Blockchain Transactions",
+    "description":
+      "Follow a transaction from wallet creation and signing to network verification.",
+    "icon": "WalletCards",
+    "available": true,
+    "level": "Foundational",
+    "activities": "Coming soon",
+    "accent": "#2fbf80"
+  },
+  {
+    "id": "cryptography",
+    "name": "Blockchain Cryptography",
+    "description":
+      "Explore hashing, public and private keys, digital signatures and addresses.",
+    "icon": "LockKeyhole",
+    "available": false,
+    "level": "Intermediate",
+    "activities": "Coming soon",
+    "accent": "#9b6cff"
+  },
+  {
+    "id": "block-structure",
+    "name": "Block Structure",
+    "description":
+      "Inspect transactions, Merkle roots, block headers and links between blocks.",
+    "icon": "Layers3",
+    "available": false,
+    "level": "Intermediate",
+    "activities": "Coming soon",
+    "accent": "#31b8cf"
+  },
+  {
+    "id": "peer-network",
+    "name": "Peer-to-Peer Networks",
+    "description":
+      "Observe how nodes discover peers, broadcast information and synchronize chains.",
+    "icon": "Globe2",
+    "available": false,
+    "level": "Intermediate",
+    "activities": "Coming soon",
+    "accent": "#ef6688"
+  },
+  {
+    "id": "forks",
+    "name": "Forks and Chain Selection",
+    "description":
+      "Understand temporary forks, competing histories and chain-selection rules.",
+    "icon": "GitBranch",
+    "available": false,
+    "level": "Advanced",
+    "activities": "Coming soon",
+    "accent": "#e6bc45"
+  }
+]
+}

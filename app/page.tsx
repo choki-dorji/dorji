@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   ArrowLeft,
   ArrowRight,
@@ -65,6 +65,101 @@ export default function Page() {
   const [statusIndex, setStatusIndex] = useState(0)
   const [isDeletingStatus, setIsDeletingStatus] = useState(false)
   const [transactionStep, setTransactionStep] = useState(0)
+  const [soundEnabled, setSoundEnabled] = useState(false)
+const [soundError, setSoundError] = useState('')
+
+const audioContextRef = useRef<AudioContext | null>(null)
+const previousStatusRef = useRef('')
+
+async function toggleTypingSound() {
+  setSoundError('')
+
+  if (soundEnabled) {
+    setSoundEnabled(false)
+    return
+  }
+
+  try {
+    if (!audioContextRef.current) {
+      audioContextRef.current = new window.AudioContext()
+    }
+
+    await audioContextRef.current.resume()
+    setSoundEnabled(true)
+  } catch {
+    setSoundError('Audio could not start. Please try again.')
+  }
+}
+
+// Play a short keyboard click when a new character appears.
+useEffect(() => {
+  const previousText = previousStatusRef.current
+  previousStatusRef.current = typedStatus
+
+  const addedCharacter = typedStatus.length > previousText.length
+  const context = audioContextRef.current
+
+  if (
+    !soundEnabled ||
+    !addedCharacter ||
+    !context ||
+    context.state !== 'running' ||
+    document.hidden
+  ) {
+    return
+  }
+
+  const duration = 0.035
+  const buffer = context.createBuffer(
+    1,
+    Math.ceil(context.sampleRate * duration),
+    context.sampleRate
+  )
+
+  const samples = buffer.getChannelData(0)
+
+  for (let i = 0; i < samples.length; i++) {
+    samples[i] = (Math.random() * 2 - 1) *
+      Math.exp(-i / (samples.length * 0.15))
+  }
+
+  const source = context.createBufferSource()
+  const filter = context.createBiquadFilter()
+  const volume = context.createGain()
+
+  source.buffer = buffer
+  source.playbackRate.value = 0.9 + Math.random() * 0.2
+
+  filter.type = 'bandpass'
+  filter.frequency.value = 1600 + Math.random() * 700
+  filter.Q.value = 0.8
+
+  volume.gain.value = 0.12
+
+  source.connect(filter)
+  filter.connect(volume)
+  volume.connect(context.destination)
+
+  source.onended = () => {
+    source.disconnect()
+    filter.disconnect()
+    volume.disconnect()
+  }
+
+  source.start()
+}, [typedStatus, soundEnabled])
+
+// Release audio resources when leaving the page.
+useEffect(() => {
+  return () => {
+    const context = audioContextRef.current
+    audioContextRef.current = null
+
+    if (context && context.state !== 'closed') {
+      void context.close().catch(() => {})
+    }
+  }
+}, [])
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark)
@@ -260,7 +355,58 @@ export default function Page() {
               {/* <span>Choki</span> */}
             </div>
           </div>
-          <div className="terminal-panel"><div className="terminal-top"><span><i /> <i /> <i /></span><small>identity.verify()</small><span>01 / 04</span></div><code><b>&gt; identity.verify()</b><br />Name: Choki Dorji<br />Role: Assistant Lecturer<br />Focus: Frontend + Backend + Blockchain<br />Location: Bhutan<br />Status: <strong className="typed-status" aria-live="polite">{typedStatus}<span className="cursor" /></strong></code></div>
+         <div className="terminal-panel">
+  <div className="terminal-top">
+    <span>
+      <i /> <i /> <i />
+    </span>
+
+    <small>identity.verify()</small>
+
+    <button
+      type="button"
+      onClick={toggleTypingSound}
+      aria-pressed={soundEnabled}
+      aria-label={
+        soundEnabled
+          ? 'Turn typing sound off'
+          : 'Turn typing sound on'
+      }
+      style={{
+        background: 'transparent',
+        border: '1px solid currentColor',
+        borderRadius: '4px',
+        color: 'inherit',
+        padding: '4px 8px',
+        cursor: 'pointer',
+        fontFamily: 'inherit',
+        fontSize: '12px',
+      }}
+    >
+      Sound: {soundEnabled ? 'On' : 'Off'}
+    </button>
+  </div>
+
+  <code>
+    <b>&gt; identity.verify()</b>
+    <br />
+    Name: Choki Dorji
+    <br />
+    Role: Assistant Lecturer
+    <br />
+    Focus: Frontend + Backend + Blockchain
+    <br />
+    Location: Bhutan
+    <br />
+    Status:{' '}
+    <strong className="typed-status">
+      {typedStatus}
+      <span className="cursor" />
+    </strong>
+  </code>
+
+  {soundError && <p role="alert">{soundError}</p>}
+</div>
         </div>
       </section>
 

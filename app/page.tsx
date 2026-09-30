@@ -396,7 +396,7 @@ useEffect(() => {
     <br />
     Focus: Frontend + Backend + Blockchain
     <br />
-    Location: Bhutan
+    Location: Kabesa, Thimphu, Bhutan 
     <br />
     Status:{' '}
     <strong className="typed-status">

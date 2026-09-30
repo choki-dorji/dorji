@@ -22,6 +22,7 @@ import {
   Sun,
   Terminal,
   X,
+  EyeIcon,
   Zap,
 } from 'lucide-react'
 import MerkleTamperSimulation from './merkle-tamper-simulation'
@@ -234,7 +235,15 @@ export default function Page() {
           <p className="eyebrow"><span className="accent-line" /> HELLO, I&apos;M CHOKI DORJI</p>
           <h1>Building software, sharing knowledge, <span style={{ color: "#fb6e0e" }}>and</span> <em>exploring blockchain.</em></h1>
           <p className="hero-lede">Full-stack software engineer building thoughtful digital products across frontend, backend, and blockchain systems.</p>
-          <div className="hero-actions"><button className="button primary" onClick={() => goTo('work')}>Explore my work <ArrowUpRight size={15} /></button><button className="button ghost" onClick={() => goTo('research')}>View research <ChevronRight size={15} /></button><button className="download"><Download size={14} /> Download CV</button></div>
+          <div className="hero-actions">
+            <button className="button primary" onClick={() => goTo('work')}>Explore my work <ArrowUpRight size={15} /></button>
+            <button className="button ghost" onClick={() => goTo('research')}>View research <ChevronRight size={15} />
+          </button>
+          <a className="button ghost" href="/choki.pdf" target="_blank" rel="noopener noreferrer">
+            <EyeIcon size={14} /> 
+            View CV
+            </a>
+          </div>
           <div className="hero-meta"><span>BASED IN <b>BHUTAN</b></span><span>FOCUS <b>TRUST + SYSTEMS</b></span><span>MODE <b>BUILDING</b></span></div>
         </div>
         <div className="hero-visual">
@@ -315,7 +324,19 @@ export default function Page() {
 
       <section id="lab" className="section lab-section">
         <div className="section-index">07 / DIGITAL LAB</div>
-        <div className="lab-header"><div><p className="eyebrow"><span className="accent-line" /> FEATURED LEARNING ENVIRONMENT</p><h2>Consensus Lab: see how networks reach <em>agreement.</em></h2><p>Enter an interactive environment where transactions, validators, miners, authorities, and consensus messages come to life.</p><div className="hero-actions"><a className="button primary" href="/lab">Launch Learning Lab <ArrowUpRight size={15} /></a><a className="button ghost" href="/lab?view=compare">View available simulations <ChevronRight size={15} /></a></div></div><span className="mono">LAB / READY</span></div><MerkleTamperSimulation /></section>
+        <div className="lab-header">
+          <div><p className="eyebrow">
+            <span className="accent-line" /> FEATURED LEARNING ENVIRONMENT</p>
+            <h2>Consensus Lab: see how networks reach 
+              <em>agreement.</em></h2>
+              <p>Enter an interactive environment where transactions, validators, miners, authorities, and consensus messages come to life.</p><div className="hero-actions"><a className="button primary" href="/lab">
+              Launch Learning Lab 
+              <ArrowUpRight size={15} /></a>
+              <a className="button ghost" href="/lab?view=compare">View available simulations 
+              <ChevronRight size={15} /></a></div>
+              </div><span className="mono">LAB / READY</span></div>
+              <MerkleTamperSimulation />
+              </section>
 
       {/* <section id="transaction" className="section transaction-lab-section"><div className="section-index">08 / TRANSACTION JOURNEY</div><div className="lab-header"><div><p className="eyebrow"><span className="accent-line" /> INTERACTIVE TRANSACTION ENVIRONMENT</p><h2>Transaction Journey Lab: see how a transaction becomes <em>final.</em></h2><p>Create and sign a transaction, broadcast it to the network, verify its data and follow it until it becomes part of a confirmed block.</p></div><span className="mono">LAB / INTERACTIVE</span></div><div className="transaction-preview"><div className="transaction-stage-list">{transactionStages.map((stage, index) => <button key={stage.title} className={"transaction-stage " + (index === transactionStep ? "active" : index < transactionStep ? "complete" : "")} aria-current={index === transactionStep ? "step" : undefined} onClick={() => setTransactionStep(index)}><span>{index < transactionStep ? "✓" : stage.short}</span><b>{stage.title}</b><small>STEP {String(index + 1).padStart(2, "0")}</small>{index < transactionStages.length - 1 && <ChevronRight size={16} />}</button>)}</div><div className="transaction-detail" aria-live="polite"><div className="transaction-code">{transactionStages[transactionStep].short}</div><div><p className="eyebrow">STAGE {String(transactionStep + 1).padStart(2, "0")} / 06</p><h3>{transactionStages[transactionStep].title}</h3><p>{transactionStages[transactionStep].detail}</p></div><div className="transaction-controls"><button aria-label="Previous transaction stage" disabled={transactionStep === 0} onClick={() => setTransactionStep((step) => Math.max(0, step - 1))}><ArrowLeft size={16} /></button><button aria-label="Next transaction stage" disabled={transactionStep === transactionStages.length - 1} onClick={() => setTransactionStep((step) => Math.min(transactionStages.length - 1, step + 1))}><ArrowRight size={16} /></button></div></div></div></section> */}
 
